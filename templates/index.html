@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asystent AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="chat-container">
+        <h3>Czat z AI Adriana</h3>
+        <div id="chat-box"></div>
+        <div class="input-area">
+            <input type="text" id="user-input" placeholder="Zadaj pytanie o moje doświadczenie...">
+            <button onclick="sendMsg()">Wyślij</button>
+        </div>
+    </div>
+
+    <script>
+    async function sendFeedback(pytanie, odpowiedz, btn) {
+        await fetch('/feedback', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({pytanie: pytanie, odpowiedz: odpowiedz})
+        });
+        btn.innerHTML = "✅";
+        btn.disabled = true;
+    }
+
+    async function sendMsg() {
+        const input = document.getElementById('user-input');
+        const box = document.getElementById('chat-box');
+
+        if(!input.value.trim()) return;
+
+        const userText = input.value;
+        box.innerHTML += `<div class="msg user">${userText}</div>`;
+
+        const typingId = "typing-" + Date.now();
+        box.innerHTML += `<div class="msg ai" id="${typingId}"><i>Adrian myśli...</i></div>`;
+
+        input.value = '';
+        box.scrollTop = box.scrollHeight;
+
+        try {
+            const response = await fetch('/chat', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({msg: userText})
+            });
+            const data = await response.json();
+
+            const msgId = "msg-" + Date.now();
+            document.getElementById(typingId).innerHTML = `
+                ${data.response}
+                <br>
+                <button class="feedback-btn" onclick="sendFeedback('${userText.replace(/'/g, "\\'")}', '${data.response.replace(/'/g, "\\'")}', this)">👍 Dobra odpowiedź</button>
+            `;
+            box.scrollTo({ top: box.scrollHeight, behavior: 'smooth' });
+        } catch (error) {
+            document.getElementById(typingId).innerHTML = "Błąd połączenia.";
+        }
+    }
+
+    document.getElementById('user-input').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            sendMsg();
+        }
+    });
+    </script>
+</body>
+</html>

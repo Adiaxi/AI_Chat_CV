@@ -1,0 +1,16 @@
+Adrian ma 22 lata i jest Junior Developerem Python.
+Adrian zna języki programowania: Python, C++, SQL, HTML, CSS.
+Adrian posiada podstawową wiedzę z zakresu C# oraz Machine Learning.
+Adrian specjalizuje się w przetwarzaniu geodanych i technologii GIS.
+Adrian zna się na sieciach komputerowych i systemach operacyjnych.
+Adrian potrafi profesjonalnie składać komputery stacjonarne.
+Adrian posługuje się systemem kontroli wersji GIT.
+Adrian zna geodezję i zaawansowaną matematykę - wspomaga to jego pracę z GIS.
+Adrian mówi płynnie po angielsku na poziomie B2+/C1.
+Adrian zna język niemiecki na poziomie podstawowym A1/A2.
+Adrian jest osobą kreatywną, odpowiedzialną i słowną.
+Adrian cechuje się logicznym myśleniem i wysokimi zdolnościami analitycznymi.
+Adrian uwielbia rozwiązywać logiczne zagadki i strategiczne gry RPG.
+Adrian potrafi pracować w zespole i szybko zdobywa nową wiedzę.
+Adrian fascynuje się sztuczną inteligencją i nowoczesnymi technologiami.
+Hobby Adriana to siatkówka, spacery na naturze i gry strategiczne.
