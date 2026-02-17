@@ -186,3 +186,17 @@ button:hover {
         backdrop-filter: blur(10px);
     }
 }
+
+.msg-wrapper {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
