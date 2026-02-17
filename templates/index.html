@@ -25,7 +25,6 @@
         });
         btn.innerHTML = typ === 'like' ? "✅" : "❌";
         btn.disabled = true;
-        // zablokuj też drugi przycisk
         const sibling = btn.nextElementSibling || btn.previousElementSibling;
         if (sibling) sibling.disabled = true;
     }
@@ -71,12 +70,16 @@
         }
     });
 
-    document.getElementById('user-input').addEventListener('focus', function() {
-        setTimeout(() => {
-            this.scrollIntoView({ behavior: 'smooth', block: 'end' });
-            window.scrollTo(0, document.body.scrollHeight);
-        }, 400);
-    });
+    // Obsługa klawiatury mobilnej
+    if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', function() {
+            const container = document.querySelector('.chat-container');
+            container.style.height = (window.visualViewport.height * 0.85) + 'px';
+            setTimeout(() => {
+                document.getElementById('user-input').scrollIntoView({ behavior: 'smooth', block: 'end' });
+            }, 100);
+        });
+    }
     </script>
 </body>
 </html>
