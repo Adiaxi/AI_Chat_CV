@@ -1,6 +1,6 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-image: url('/static/Background.pdf');
+    background-image: url('/static/Background.jpg');
     display: flex;
     justify-content: center;
     align-items: center;
