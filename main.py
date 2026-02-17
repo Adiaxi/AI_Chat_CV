@@ -1,6 +1,26 @@
 import os
 import requests
 from flask import Flask, render_template, request, jsonify
+import psycopg2
+
+DATABASE_URL = os.environ.get("DATABASE_URL")
+
+def init_db():
+    conn = psycopg2.connect(DATABASE_URL)
+    cur = conn.cursor()
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS feedback (
+            id SERIAL PRIMARY KEY,
+            pytanie TEXT,
+            odpowiedz TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+    conn.commit()
+    cur.close()
+    conn.close()
+
+init_db()
 
 app = Flask(__name__)
 
@@ -81,8 +101,12 @@ def feedback():
     pytanie = data.get("pytanie", "")
     odpowiedz = data.get("odpowiedz", "")
 
-    with open("feedback.txt", "a", encoding="utf-8") as f:
-        f.write(f"Pytanie: {pytanie}\nDobra odpowiedź: {odpowiedz}\n---\n")
+    conn = psycopg2.connect(DATABASE_URL)
+    cur = conn.cursor()
+    cur.execute("INSERT INTO feedback (pytanie, odpowiedz) VALUES (%s, %s)", (pytanie, odpowiedz))
+    conn.commit()
+    cur.close()
+    conn.close()
 
     return jsonify({"status": "ok"})
 
