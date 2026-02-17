@@ -6,7 +6,7 @@ import psycopg2
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
 def init_db():
-    conn = psycopg2.connect(DATABASE_URL)
+    conn = psycopg2.connect(DATABASE_URL, connect_timeout=10)
     cur = conn.cursor()
     cur.execute("""
         CREATE TABLE IF NOT EXISTS feedback (
