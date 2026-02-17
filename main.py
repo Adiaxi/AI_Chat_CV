@@ -13,6 +13,7 @@ def init_db():
             id SERIAL PRIMARY KEY,
             pytanie TEXT,
             odpowiedz TEXT,
+            typ VARCHAR(10) DEFAULT 'like',
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     """)
@@ -29,6 +30,22 @@ HF_TOKEN = os.environ.get("HF_TOKEN")
 TXT_FILE = "pamiec.txt"
 
 
+def get_feedback_examples():
+    try:
+        conn = psycopg2.connect(DATABASE_URL)
+        cur = conn.cursor()
+        cur.execute("SELECT pytanie, odpowiedz FROM feedback WHERE typ = 'like' ORDER BY created_at DESC LIMIT 10")
+        rows = cur.fetchall()
+        cur.close()
+        conn.close()
+        if not rows:
+            return ""
+        examples = "\n".join([f"Pytanie: {r[0]}\nDobra odpowiedź: {r[1]}" for r in rows])
+        return f"\nPrzykłady dobrych odpowiedzi (ucz się z nich stylu):\n{examples}"
+    except:
+        return ""
+
+
 def generate_ai_answer(user_question):
     try:
         with open(TXT_FILE, "r", encoding="utf-8") as f:
@@ -36,13 +53,7 @@ def generate_ai_answer(user_question):
     except:
         context = "Adrian to Junior Python Developer."
 
-    try:
-        with open("feedback.txt", "r", encoding="utf-8") as f:
-            feedback = f.read()
-    except:
-        feedback = ""
-
-    feedback_section = f"\nPrzykłady dobrych odpowiedzi (ucz się z nich stylu):\n{feedback}" if feedback else ""
+    feedback_section = get_feedback_examples()
 
     headers = {
         "Authorization": f"Bearer {HF_TOKEN}",
@@ -100,10 +111,11 @@ def feedback():
     data = request.json
     pytanie = data.get("pytanie", "")
     odpowiedz = data.get("odpowiedz", "")
+    typ = data.get("typ", "like")
 
     conn = psycopg2.connect(DATABASE_URL)
     cur = conn.cursor()
-    cur.execute("INSERT INTO feedback (pytanie, odpowiedz) VALUES (%s, %s)", (pytanie, odpowiedz))
+    cur.execute("INSERT INTO feedback (pytanie, odpowiedz, typ) VALUES (%s, %s, %s)", (pytanie, odpowiedz, typ))
     conn.commit()
     cur.close()
     conn.close()

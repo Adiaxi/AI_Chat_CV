@@ -17,14 +17,17 @@
     </div>
 
     <script>
-    async function sendFeedback(pytanie, odpowiedz, btn) {
+    async function sendFeedback(pytanie, odpowiedz, typ, btn) {
         await fetch('/feedback', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({pytanie: pytanie, odpowiedz: odpowiedz})
+            body: JSON.stringify({pytanie: pytanie, odpowiedz: odpowiedz, typ: typ})
         });
-        btn.innerHTML = "✅";
+        btn.innerHTML = typ === 'like' ? "✅" : "❌";
         btn.disabled = true;
+        // zablokuj też drugi przycisk
+        const sibling = btn.nextElementSibling || btn.previousElementSibling;
+        if (sibling) sibling.disabled = true;
     }
 
     async function sendMsg() {
@@ -50,11 +53,11 @@
             });
             const data = await response.json();
 
-            const msgId = "msg-" + Date.now();
             document.getElementById(typingId).innerHTML = `
                 ${data.response}
                 <br>
-                <button class="feedback-btn" onclick="sendFeedback('${userText.replace(/'/g, "\\'")}', '${data.response.replace(/'/g, "\\'")}', this)">👍 Dobra odpowiedź</button>
+                <button class="feedback-btn" onclick="sendFeedback('${userText.replace(/'/g, "\\'")}', '${data.response.replace(/'/g, "\\'")}', 'like', this)">👍 Dobra</button>
+                <button class="feedback-btn dislike" onclick="sendFeedback('${userText.replace(/'/g, "\\'")}', '${data.response.replace(/'/g, "\\'")}', 'dislike', this)">👎 Zła</button>
             `;
             box.scrollTo({ top: box.scrollHeight, behavior: 'smooth' });
         } catch (error) {

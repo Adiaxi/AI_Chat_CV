@@ -112,3 +112,7 @@ button:hover {
 .feedback-btn:hover {
     background: #f0f0f0;
 }
+
+.feedback-btn.dislike {
+    margin-left: 6px;
+}
