@@ -1,4 +1,4 @@
-Adrian ma 22 lata i jest Junior Developerem Python.
+Adrian ma 22 lata i chcę być Junior Developerem Python.
 Adrian zna języki programowania: Python, C++, SQL, HTML, CSS.
 Adrian posiada podstawową wiedzę z zakresu C# oraz Machine Learning.
 Adrian specjalizuje się w przetwarzaniu geodanych i technologii GIS.
