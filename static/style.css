@@ -1,6 +1,6 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-image:
+    background-image: url('/static/../Img/Background.jpg');
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,7 +20,7 @@ body {
 }
 
 h3 {
-    background: #007bff;
+    background: #576b70;
     color: white;
     margin: 0;
     padding: 20px;
@@ -45,7 +45,7 @@ h3 {
 }
 
 .user {
-    background: #007bff;
+    background: #576b70;
     color: white;
     align-self: flex-end;
     border-bottom-right-radius: 2px;
