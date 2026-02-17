@@ -70,7 +70,11 @@
         }
     });
 
-    // Obsługa klawiatury mobilnej
+    window.addEventListener('load', function() {
+        const box = document.getElementById('chat-box');
+        box.innerHTML += `<div class="msg ai">Cześć! Jestem AI asystentem Adriana 👋 Zapytaj mnie o jego doświadczenie, umiejętności lub projekty!</div>`;
+    });
+
     if (window.visualViewport) {
         window.visualViewport.addEventListener('resize', function() {
             const container = document.querySelector('.chat-container');
