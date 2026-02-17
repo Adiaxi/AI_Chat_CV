@@ -73,9 +73,9 @@
 
     document.getElementById('user-input').addEventListener('focus', function() {
         setTimeout(() => {
-            document.getElementById('chat-box').scrollTop = document.getElementById('chat-box').scrollHeight;
+            this.scrollIntoView({ behavior: 'smooth', block: 'end' });
             window.scrollTo(0, document.body.scrollHeight);
-        }, 300);
+        }, 400);
     });
     </script>
 </body>

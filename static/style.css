@@ -168,3 +168,21 @@ button:hover {
         padding: 8px;
     }
 }
+
+@media (max-width: 480px) {
+    .chat-container {
+        width: 90%;
+        height: 80dvh;
+        max-height: 80dvh;
+    }
+}
+
+@media (max-width: 480px) {
+    .input-area {
+        position: sticky;
+        bottom: 0;
+        z-index: 10;
+        background: rgba(255,255,255,0.15);
+        backdrop-filter: blur(10px);
+    }
+}
