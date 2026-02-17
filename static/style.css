@@ -119,8 +119,41 @@ button:hover {
 
 @media (max-width: 480px) {
     .chat-container {
-        width: 80%;
-        height: 70vh;
+        width: 90%;
+        height: 80vh;
         border-radius: 15px;
+    }
+
+    .input-area {
+        padding: 10px;
+        flex-wrap: nowrap;
+    }
+
+    input {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+
+    button {
+        padding: 8px 14px;
+        font-size: 13px;
+        white-space: nowrap;
+    }
+}
+
+@media (max-height: 480px) and (orientation: landscape) {
+    .chat-container {
+        width: 70%;
+        height: 90vh;
+        border-radius: 15px;
+    }
+
+    h3 {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .input-area {
+        padding: 8px;
     }
 }
