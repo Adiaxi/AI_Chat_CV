@@ -1,6 +1,6 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-image: url('/static/Background.jpg');
+    background-image: url('/static/Background.pdf');
     display: flex;
     justify-content: center;
     align-items: center;
@@ -75,7 +75,7 @@ input {
 
 button {
     padding: 10px 20px;
-    background: #28a745;
+    background: #3a484c;
     color: white;
     border: none;
     border-radius: 25px;
@@ -85,7 +85,7 @@ button {
 }
 
 button:hover {
-    background: #218838;
+    background: #2e3a3d;
 }
 
 @keyframes blink {
