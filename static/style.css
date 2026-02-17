@@ -20,11 +20,22 @@ body {
 }
 
 h3 {
-    background: #576b70;
+    background: #007bff;
     color: white;
     margin: 0;
     padding: 20px;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.header-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 #chat-box {
