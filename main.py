@@ -5,7 +5,7 @@ from flask import Flask, render_template, request, jsonify
 app = Flask(__name__)
 
 API_URL = "https://router.huggingface.co/together/v1/chat/completions"
-HF_TOKEN = "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"
+HF_TOKEN = os.environ.get("HF_TOKEN")
 TXT_FILE = "pamiec.txt"
 
 
