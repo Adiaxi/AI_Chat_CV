@@ -118,15 +118,26 @@ button:hover {
 }
 
 @media (max-width: 480px) {
+    body {
+        align-items: center;
+        height: 100%;
+        min-height: 100vh;
+    }
+
     .chat-container {
         width: 90%;
-        height: 80vh;
+        height: 80dvh;
+        max-height: 80dvh;
         border-radius: 15px;
+        position: relative;
     }
 
     .input-area {
         padding: 10px;
         flex-wrap: nowrap;
+        position: sticky;
+        bottom: 0;
+        background: inherit;
     }
 
     input {
@@ -144,7 +155,7 @@ button:hover {
 @media (max-height: 480px) and (orientation: landscape) {
     .chat-container {
         width: 70%;
-        height: 90vh;
+        height: 90dvh;
         border-radius: 15px;
     }
 

@@ -70,6 +70,13 @@
             sendMsg();
         }
     });
+
+    document.getElementById('user-input').addEventListener('focus', function() {
+        setTimeout(() => {
+            document.getElementById('chat-box').scrollTop = document.getElementById('chat-box').scrollHeight;
+            window.scrollTo(0, document.body.scrollHeight);
+        }, 300);
+    });
     </script>
 </body>
 </html>
