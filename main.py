@@ -87,7 +87,7 @@ ZASADY - przestrzegaj bezwzględnie:
             }
         ],
         "max_tokens": 400,
-        "temperature": 1
+        "temperature": 2
     }
 
     try:
