@@ -104,8 +104,16 @@ ZASADY - przestrzegaj bezwzględnie:
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('index.html')  # Twoje nowe portfolio
 
+@app.route('/ai-asystent')
+def ai_asystent():
+    return render_template('chat.html')   # Stary czat
+
+
+@app.route('/chat.html')
+def chat_html():
+    return render_template('chat.html')
 
 @app.route('/feedback', methods=['POST'])
 def feedback():

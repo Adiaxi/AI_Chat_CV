@@ -3,98 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asystent AI</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Adrian Kluska | Portfolio</title>
+    <link rel="stylesheet" href="../static/style.css">
 </head>
-<body>
-    <div class="chat-container">
-        <h3>CV Chat</h3>
-        <div id="chat-box"></div>
-        <div class="input-area">
-            <input type="text" id="user-input" placeholder="Zadaj pytanie o moje doświadczenie...">
-            <button onclick="sendMsg()">Wyślij</button>
+<body class="portfolio-page">
+    <main class="layout">
+        <section class="hero-wrap hero" id="start">
+            <header class="topbar">
+                <div class="brand">Adrian Kluska</div>
+                <nav class="menu" aria-label="Nawigacja">
+                    <a href="#o-mnie">O mnie</a>
+                    <a href="#umiejetnosci">Umiejętności</a>
+                    <a href="#projekty">Projekty</a>
+                    <a href="#kontakt">Kontakt</a>
+                    <a href="#ai-asystent">AI</a>
+                </nav>
+                <div class="social" aria-label="Skróty">
+                    <a class="social-link" href="https://github.com/Adiaxi" target="_blank" rel="noopener noreferrer" aria-label="GitHub">G</a>
+                    <button type="button" class="social-link" id="topEmailBtn" aria-label="E-mail">@</button>
+                </div>
+            </header>
+
+            <div class="hero-grid">
+                <aside class="hero-visual" aria-label="Zdjęcie Adriana">
+                    <img src="../static/me.png?v=1" alt="Adrian Kluska" class="hero-photo">
+                </aside>
+                <div class="hero-content">
+                    <span class="hero-tag">Informatyka + geoinformatyka + AI</span>
+                    <h1>Cześć, jestem Adrian Kluska.</h1>
+                    <p>
+                        Tworzę aplikacje webowe w Pythonie i rozwijam projekty związane z danymi przestrzennymi.
+                    </p>
+                    <div class="hero-cta">
+                        <a href="chat.html" class="btn btn-main">Porozmawiaj z AI Asystentem</a>
+                        <a href="#projekty" class="btn btn-ghost">Zobacz projekty</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="main">
+            <article class="section" id="o-mnie">
+                <h2>O mnie</h2>
+                <p>
+                    Jestem Junior Python Developerem z kierunkiem geoinformatycznym. Buduję rozwiązania od warstwy
+                    backendowej po front i skupiam się na tym, żeby finalny produkt był czytelny i praktyczny.
+                </p>
+                <div class="chips">
+                    <span class="chip">Python</span>
+                    <span class="chip">Flask</span>
+                    <span class="chip">PostgreSQL</span>
+                    <span class="chip">REST API</span>
+                    <span class="chip">GIS workflow</span>
+                    <span class="chip">Integracje AI</span>
+                </div>
+            </article>
+
+            <article class="section" id="umiejetnosci">
+                <h2>Umiejętności</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>Backend i API</h3>
+                        <p>Projektowanie endpointów, logika biznesowa, integracje z usługami zewnętrznymi.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Dane przestrzenne</h3>
+                        <p>Praca z danymi geograficznymi, modelowanie informacji i analiza mapowa.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Warstwa frontend</h3>
+                        <p>Interfejsy webowe, responsywność i nacisk na czytelność oraz użyteczność.</p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="section" id="projekty">
+                <h2>Projekty</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>AI CV Assistant</h3>
+                        <p>Asystent oparty o Flask, odpowiadający na pytania o doświadczenie i technologie.</p>
+                    </div>
+                    <div class="card">
+                        <h3>System feedbacku AI</h3>
+                        <p>Zbieranie ocen jakości odpowiedzi oraz zapis danych do bazy PostgreSQL.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Narzędzia geo</h3>
+                        <p>Koncepty aplikacji geoinformatycznych do analizy danych i wizualizacji przestrzennej.</p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="section">
+                <h2>Profil geoinformatyczny</h2>
+                <p>
+                    W pracy projektowej skupiam się na łączeniu programowania z danymi przestrzennymi i analityką,
+                    aby budować funkcjonalne rozwiązania dla map, lokalizacji i procesów decyzyjnych.
+                </p>
+                <div class="map-stats">
+                    <div class="stat">
+                        <strong>3+</strong>
+                        <span>obszary pracy: backend, AI, geodane</span>
+                    </div>
+                    <div class="stat">
+                        <strong>7</strong>
+                        <span>repozytoriów publicznych na GitHubie</span>
+                    </div>
+                    <div class="stat">
+                        <strong>100%</strong>
+                        <span>nacisku na praktyczne wdrożenie</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="section" id="kontakt">
+                <h2>Kontakt</h2>
+                <p>
+                    Jeśli chcesz porozmawiać o współpracy, projekcie lub roli juniorskiej, zapraszam do kontaktu.
+                </p>
+                <div class="hero-cta">
+                    <a href="https://github.com/Adiaxi" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">GitHub</a>
+                    <button type="button" class="btn btn-main" id="emailPopupBtn">Pokaż e-mail</button>
+                </div>
+            </article>
+
+            <article class="section" id="ai-asystent">
+                <h2>AI Asystent</h2>
+                <p>
+                    Przejdź do czatu, aby zapytać o moje doświadczenie, technologie i sposób pracy. Chatbot działa
+                    osobno i nie był modyfikowany.
+                </p>
+                <div class="hero-cta">
+                    <a href="chat.html" class="btn btn-main">Przejdź do AI Asystenta</a>
+                    <a href="#start" class="btn btn-ghost">Powrót na górę</a>
+                </div>
+            </article>
+        </section>
+
+        <footer class="footer">
+            2026 Adrian Kluska. Portfolio informatyczno-geoinformatyczne.
+        </footer>
+    </main>
+
+    <div class="modal-overlay" id="emailModal" aria-hidden="true">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="emailModalTitle">
+            <h3 id="emailModalTitle">Skontaktuj się ze mną</h3>
+            <p>Najwygodniej napisać bezpośrednio na ten adres e-mail:</p>
+            <div class="email-box" id="emailText">adrian.kluska1542@gmail.com</div>
+            <div class="hero-cta">
+                <button type="button" class="btn btn-main" id="copyEmailBtn">Kopiuj e-mail</button>
+                <button type="button" class="btn btn-ghost" id="closeEmailModalBtn">Zamknij</button>
+            </div>
         </div>
     </div>
 
     <script>
-    function aiMessage(id, content) {
-        return `
-            <div class="msg-wrapper" id="${id}">
-                <img src="/static/Icon.jpg" class="avatar">
-                <div class="msg ai">${content}</div>
-            </div>
-        `;
-    }
+        const emailPopupBtn = document.getElementById("emailPopupBtn");
+        const topEmailBtn = document.getElementById("topEmailBtn");
+        const emailModal = document.getElementById("emailModal");
+        const closeEmailModalBtn = document.getElementById("closeEmailModalBtn");
+        const copyEmailBtn = document.getElementById("copyEmailBtn");
+        const emailText = document.getElementById("emailText").textContent.trim();
 
-    async function sendFeedback(pytanie, odpowiedz, typ, btn) {
-        await fetch('/feedback', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({pytanie: pytanie, odpowiedz: odpowiedz, typ: typ})
-        });
-        btn.innerHTML = typ === 'like' ? "✅" : "❌";
-        btn.disabled = true;
-        const sibling = btn.nextElementSibling || btn.previousElementSibling;
-        if (sibling) sibling.disabled = true;
-    }
-
-    async function sendMsg() {
-        const input = document.getElementById('user-input');
-        const box = document.getElementById('chat-box');
-
-        if(!input.value.trim()) return;
-
-        const userText = input.value;
-        box.innerHTML += `<div class="msg user">${userText}</div>`;
-
-        const typingId = "typing-" + Date.now();
-        box.innerHTML += aiMessage(typingId, '<i>Asystent myśli...</i>');
-
-        input.value = '';
-        box.scrollTop = box.scrollHeight;
-
-        try {
-            const response = await fetch('/chat', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({msg: userText})
-            });
-            const data = await response.json();
-
-            const wrapper = document.getElementById(typingId);
-            wrapper.querySelector('.msg.ai').innerHTML = `
-                ${data.response}
-                <br>
-                <button class="feedback-btn" onclick="sendFeedback('${userText.replace(/'/g, "\\'")}', '${data.response.replace(/'/g, "\\'")}', 'like', this)">👍 Dobra</button>
-                <button class="feedback-btn dislike" onclick="sendFeedback('${userText.replace(/'/g, "\\'")}', '${data.response.replace(/'/g, "\\'")}', 'dislike', this)">👎 Zła</button>
-            `;
-            box.scrollTo({ top: box.scrollHeight, behavior: 'smooth' });
-        } catch (error) {
-            const wrapper = document.getElementById(typingId);
-            wrapper.querySelector('.msg.ai').innerHTML = "Błąd połączenia.";
+        function openEmailModal() {
+            emailModal.classList.add("active");
+            emailModal.setAttribute("aria-hidden", "false");
         }
-    }
 
-    document.getElementById('user-input').addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') {
-            sendMsg();
+        function closeEmailModal() {
+            emailModal.classList.remove("active");
+            emailModal.setAttribute("aria-hidden", "true");
+            copyEmailBtn.textContent = "Kopiuj e-mail";
         }
-    });
 
-    window.addEventListener('load', function() {
-        const box = document.getElementById('chat-box');
-        box.innerHTML += aiMessage('welcome', 'Cześć! Jestem AI asystentem Adriana 👋 Zapytaj mnie o jego doświadczenie, umiejętności lub projekty!');
-    });
+        emailPopupBtn.addEventListener("click", openEmailModal);
+        topEmailBtn.addEventListener("click", openEmailModal);
+        closeEmailModalBtn.addEventListener("click", closeEmailModal);
 
-    if (window.visualViewport) {
-        window.visualViewport.addEventListener('resize', function() {
-            const container = document.querySelector('.chat-container');
-            container.style.height = (window.visualViewport.height * 0.85) + 'px';
-            setTimeout(() => {
-                document.getElementById('user-input').scrollIntoView({ behavior: 'smooth', block: 'end' });
-            }, 100);
+        emailModal.addEventListener("click", (event) => {
+            if (event.target === emailModal) {
+                closeEmailModal();
+            }
         });
-    }
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && emailModal.classList.contains("active")) {
+                closeEmailModal();
+            }
+        });
+
+        copyEmailBtn.addEventListener("click", async () => {
+            try {
+                await navigator.clipboard.writeText(emailText);
+                copyEmailBtn.textContent = "Skopiowano";
+            } catch (error) {
+                copyEmailBtn.textContent = "Skopiuj ręcznie";
+            }
+        });
     </script>
 </body>
 </html>
