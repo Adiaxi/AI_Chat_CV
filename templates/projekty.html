@@ -230,12 +230,9 @@
         .shots-grid {
             display: flex;
             gap: 12px;
-            padding: 14px;
+            padding: 4px 0;
             padding-left: calc((100% - var(--slide-w)) / 2);
             padding-right: calc((100% - var(--slide-w)) / 2);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            background: linear-gradient(180deg, rgba(245, 249, 255, 0.06), rgba(245, 249, 255, 0.02));
             overflow-x: auto;
             overflow-y: hidden;
             scroll-snap-type: x mandatory;
@@ -249,13 +246,13 @@
 
         .shot-link {
             display: block;
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
-            border: 1px solid rgba(175, 205, 235, 0.22);
-            background: linear-gradient(180deg, rgba(248, 252, 255, 0.97), rgba(236, 243, 252, 0.95));
+            border: 1px solid rgba(148, 182, 214, 0.24);
+            background: rgba(12, 20, 32, 0.55);
             position: relative;
             transition: transform 140ms ease, border-color 140ms ease, box-shadow 140ms ease, opacity 140ms ease, filter 140ms ease;
-            box-shadow: 0 5px 12px rgba(2, 10, 26, 0.2);
+            box-shadow: 0 4px 10px rgba(2, 10, 26, 0.18);
             flex: 0 0 var(--slide-w);
             scroll-snap-align: center;
             opacity: 0.58;
@@ -270,8 +267,8 @@
             width: 100%;
             aspect-ratio: 16 / 10;
             object-fit: cover;
-            padding: 6px;
-            border-radius: 10px;
+            padding: 0;
+            border-radius: 0;
             background: transparent;
             transition: transform 220ms ease;
             pointer-events: none;
@@ -281,7 +278,7 @@
         .shot-link.is-center .shot {
             object-fit: contain;
             background: rgba(10, 16, 28, 0.88);
-            padding: 10px;
+            padding: 8px;
         }
 
         .shot-link:not(.is-center) .shot {
@@ -475,8 +472,44 @@
             2026 Adrian Kluska. Portfolio informatyczno-geoinformatyczne.
         </footer>
     </main>
+    <div class="image-lightbox" id="imageLightbox" aria-hidden="true">
+        <div class="image-lightbox-dialog" role="dialog" aria-modal="true" aria-label="Podgląd obrazu">
+            <button type="button" class="image-lightbox-close" id="imageLightboxClose" aria-label="Zamknij podgląd">×</button>
+            <img class="image-lightbox-img" id="imageLightboxImg" src="" alt="Podgląd obrazu projektu">
+        </div>
+    </div>
     <div class="topbar-compact" id="compactTopbar" aria-hidden="true"></div>
     <script>
+        const imageLightbox = document.getElementById("imageLightbox");
+        const imageLightboxImg = document.getElementById("imageLightboxImg");
+        const imageLightboxClose = document.getElementById("imageLightboxClose");
+
+        function openImageLightbox(src, altText) {
+            imageLightboxImg.src = src;
+            imageLightboxImg.alt = altText || "Podgląd obrazu projektu";
+            imageLightbox.classList.add("active");
+            imageLightbox.setAttribute("aria-hidden", "false");
+        }
+
+        function closeImageLightbox() {
+            imageLightbox.classList.remove("active");
+            imageLightbox.setAttribute("aria-hidden", "true");
+            imageLightboxImg.src = "";
+        }
+
+        imageLightboxClose.addEventListener("click", closeImageLightbox);
+        imageLightbox.addEventListener("click", (event) => {
+            if (event.target === imageLightbox) {
+                closeImageLightbox();
+            }
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && imageLightbox.classList.contains("active")) {
+                closeImageLightbox();
+            }
+        });
+
         const carousels = document.querySelectorAll(".carousel");
 
         carousels.forEach((carousel) => {
@@ -608,6 +641,17 @@
             track.addEventListener("dragstart", (event) => event.preventDefault());
             slides.forEach((slide) => {
                 slide.addEventListener("dragstart", (event) => event.preventDefault());
+            });
+            track.addEventListener("click", (event) => {
+                const link = event.target.closest(".shot-link");
+                if (!link) return;
+                if (moved) {
+                    event.preventDefault();
+                    return;
+                }
+                event.preventDefault();
+                const img = link.querySelector(".shot");
+                openImageLightbox(link.href, img ? img.alt : "Podgląd obrazu projektu");
             });
             window.addEventListener("resize", () => {
                 recalcLoopMetrics();

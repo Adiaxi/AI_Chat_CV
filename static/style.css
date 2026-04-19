@@ -635,6 +635,56 @@ body.portfolio-page {
     display: flex;
 }
 
+.image-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1800;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    background: rgba(3, 7, 12, 0.84);
+}
+
+.image-lightbox.active {
+    display: flex;
+}
+
+.image-lightbox-dialog {
+    position: relative;
+    width: min(1200px, 96vw);
+    max-height: 92vh;
+    border-radius: 12px;
+    border: 1px solid rgba(170, 204, 235, 0.35);
+    background: rgba(10, 16, 25, 0.92);
+    padding: 10px;
+    box-shadow: 0 22px 50px rgba(0, 0, 0, 0.48);
+}
+
+.image-lightbox-img {
+    display: block;
+    width: 100%;
+    max-height: calc(92vh - 22px);
+    object-fit: contain;
+    border-radius: 8px;
+    background: rgba(6, 10, 16, 0.85);
+}
+
+.image-lightbox-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 999px;
+    background: rgba(7, 12, 18, 0.78);
+    color: #f3f8ff;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+}
+
 .modal {
     width: min(450px, 100%);
     border-radius: 14px;
