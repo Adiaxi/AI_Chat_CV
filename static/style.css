@@ -685,6 +685,41 @@ body.portfolio-page {
     cursor: pointer;
 }
 
+.modal.image-modal {
+    width: min(1200px, 96vw);
+    max-height: 92vh;
+    position: relative;
+    padding: 12px;
+}
+
+.image-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 999px;
+    background: rgba(7, 12, 18, 0.78);
+    color: #f3f8ff;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.image-modal h3 {
+    margin-right: 42px;
+}
+
+.image-modal-img {
+    display: block;
+    width: 100%;
+    max-height: calc(92vh - 84px);
+    object-fit: contain;
+    border-radius: 8px;
+    background: rgba(6, 10, 16, 0.85);
+}
+
 .modal {
     width: min(450px, 100%);
     border-radius: 14px;

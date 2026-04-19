@@ -248,11 +248,11 @@
             display: block;
             border-radius: 10px;
             overflow: hidden;
-            border: 1px solid rgba(148, 182, 214, 0.24);
-            background: rgba(12, 20, 32, 0.55);
+            border: none;
+            background: transparent;
             position: relative;
             transition: transform 140ms ease, border-color 140ms ease, box-shadow 140ms ease, opacity 140ms ease, filter 140ms ease;
-            box-shadow: 0 4px 10px rgba(2, 10, 26, 0.18);
+            box-shadow: none;
             flex: 0 0 var(--slide-w);
             scroll-snap-align: center;
             opacity: 0.58;
@@ -268,7 +268,8 @@
             aspect-ratio: 16 / 10;
             object-fit: cover;
             padding: 0;
-            border-radius: 0;
+            border-radius: 10px;
+            border: 1px solid rgba(148, 182, 214, 0.24);
             background: transparent;
             transition: transform 220ms ease;
             pointer-events: none;
@@ -278,7 +279,7 @@
         .shot-link.is-center .shot {
             object-fit: contain;
             background: rgba(10, 16, 28, 0.88);
-            padding: 8px;
+            padding: 0;
         }
 
         .shot-link:not(.is-center) .shot {
@@ -289,13 +290,11 @@
             opacity: 1;
             filter: saturate(1);
             transform: scale(0.98);
-            border-color: rgba(121, 194, 246, 0.65);
-            box-shadow: 0 10px 22px rgba(2, 10, 26, 0.3);
+            box-shadow: none;
         }
 
         .shot-link:hover {
-            border-color: rgba(121, 194, 246, 0.7);
-            box-shadow: 0 10px 22px rgba(2, 10, 26, 0.28);
+            box-shadow: none;
         }
 
         .shot-link:hover .shot {
@@ -472,40 +471,41 @@
             2026 Adrian Kluska. Portfolio informatyczno-geoinformatyczne.
         </footer>
     </main>
-    <div class="image-lightbox" id="imageLightbox" aria-hidden="true">
-        <div class="image-lightbox-dialog" role="dialog" aria-modal="true" aria-label="Podgląd obrazu">
-            <button type="button" class="image-lightbox-close" id="imageLightboxClose" aria-label="Zamknij podgląd">×</button>
-            <img class="image-lightbox-img" id="imageLightboxImg" src="" alt="Podgląd obrazu projektu">
+    <div class="modal-overlay" id="imageModal" aria-hidden="true">
+        <div class="modal image-modal" role="dialog" aria-modal="true" aria-labelledby="imageModalTitle">
+            <button type="button" class="image-modal-close" id="imageModalClose" aria-label="Zamknij podgląd">×</button>
+            <h3 id="imageModalTitle">Podgląd obrazu</h3>
+            <img class="image-modal-img" id="imageModalImg" src="" alt="Podgląd obrazu projektu">
         </div>
     </div>
     <div class="topbar-compact" id="compactTopbar" aria-hidden="true"></div>
     <script>
-        const imageLightbox = document.getElementById("imageLightbox");
-        const imageLightboxImg = document.getElementById("imageLightboxImg");
-        const imageLightboxClose = document.getElementById("imageLightboxClose");
+        const imageModal = document.getElementById("imageModal");
+        const imageModalImg = document.getElementById("imageModalImg");
+        const imageModalClose = document.getElementById("imageModalClose");
 
         function openImageLightbox(src, altText) {
-            imageLightboxImg.src = src;
-            imageLightboxImg.alt = altText || "Podgląd obrazu projektu";
-            imageLightbox.classList.add("active");
-            imageLightbox.setAttribute("aria-hidden", "false");
+            imageModalImg.src = src;
+            imageModalImg.alt = altText || "Podgląd obrazu projektu";
+            imageModal.classList.add("active");
+            imageModal.setAttribute("aria-hidden", "false");
         }
 
         function closeImageLightbox() {
-            imageLightbox.classList.remove("active");
-            imageLightbox.setAttribute("aria-hidden", "true");
-            imageLightboxImg.src = "";
+            imageModal.classList.remove("active");
+            imageModal.setAttribute("aria-hidden", "true");
+            imageModalImg.src = "";
         }
 
-        imageLightboxClose.addEventListener("click", closeImageLightbox);
-        imageLightbox.addEventListener("click", (event) => {
-            if (event.target === imageLightbox) {
+        imageModalClose.addEventListener("click", closeImageLightbox);
+        imageModal.addEventListener("click", (event) => {
+            if (event.target === imageModal) {
                 closeImageLightbox();
             }
         });
 
         document.addEventListener("keydown", (event) => {
-            if (event.key === "Escape" && imageLightbox.classList.contains("active")) {
+            if (event.key === "Escape" && imageModal.classList.contains("active")) {
                 closeImageLightbox();
             }
         });
