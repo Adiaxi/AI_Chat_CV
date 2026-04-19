@@ -510,8 +510,8 @@ body.portfolio-page {
 }
 
 .section {
-    background: linear-gradient(180deg, var(--card) 0%, var(--card-2) 100%);
-    border: 1px solid var(--line);
+    background: rgba(20, 30, 42, 0.72);
+    border: 1px solid rgba(130, 164, 196, 0.18);
     border-radius: 16px;
     padding: 22px;
     position: relative;
@@ -523,9 +523,9 @@ body.portfolio-page {
     position: absolute;
     left: 0;
     top: 0;
-    width: 4px;
+    width: 2px;
     height: 100%;
-    background: linear-gradient(180deg, var(--accent), rgba(79, 156, 255, 0.3));
+    background: linear-gradient(180deg, rgba(108, 193, 224, 0.68), rgba(79, 156, 255, 0.18));
 }
 
 .section h2 {
@@ -535,8 +535,8 @@ body.portfolio-page {
 
 .section p {
     margin: 0 0 14px;
-    color: var(--muted);
-    line-height: 1.65;
+    color: #b8c7d8;
+    line-height: 1.6;
 }
 
 .chips {
@@ -547,11 +547,11 @@ body.portfolio-page {
 
 .chip {
     font-size: 13px;
-    color: #dff3fb;
-    background: rgba(88, 192, 216, 0.12);
-    border: 1px solid rgba(88, 192, 216, 0.35);
+    color: #d2e6f2;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(166, 196, 223, 0.28);
     border-radius: 999px;
-    padding: 7px 10px;
+    padding: 6px 10px;
 }
 
 .grid {
@@ -561,16 +561,17 @@ body.portfolio-page {
 }
 
 .card {
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(148, 179, 208, 0.18);
     border-radius: 12px;
-    padding: 15px;
-    background: rgba(5, 10, 16, 0.22);
-    transition: transform 0.2s ease, border-color 0.2s ease;
+    padding: 16px;
+    background: rgba(14, 23, 35, 0.44);
+    transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
 }
 
 .card:hover {
-    transform: translateY(-3px);
-    border-color: rgba(88, 192, 216, 0.44);
+    transform: translateY(-2px);
+    border-color: rgba(131, 193, 238, 0.4);
+    background: rgba(18, 29, 43, 0.56);
 }
 
 .card h3 {
@@ -582,7 +583,8 @@ body.portfolio-page {
 .card p {
     margin: 0;
     font-size: 14px;
-    color: var(--muted);
+    color: #b4c4d5;
+    line-height: 1.58;
 }
 
 .map-stats {
@@ -594,8 +596,8 @@ body.portfolio-page {
 .stat {
     padding: 12px;
     border-radius: 12px;
-    border: 1px solid rgba(242, 202, 104, 0.28);
-    background: rgba(242, 202, 104, 0.09);
+    border: 1px solid rgba(222, 193, 127, 0.22);
+    background: rgba(226, 189, 111, 0.06);
 }
 
 .stat strong {
