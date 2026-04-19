@@ -200,6 +200,9 @@
             align-items: center;
             gap: var(--space-2);
             flex-wrap: wrap;
+            padding-bottom: 12px;
+            margin-bottom: 2px;
+            border-bottom: 1px solid rgba(153, 191, 224, 0.22);
         }
 
         .project-head h2 {
@@ -209,6 +212,20 @@
             letter-spacing: 0.01em;
             color: #f3f8ff;
             text-shadow: 0 2px 12px rgba(0, 0, 0, 0.22);
+            position: relative;
+            padding-left: 10px;
+        }
+
+        .project-head h2::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 78%;
+            border-radius: 999px;
+            background: linear-gradient(180deg, rgba(107, 196, 234, 0.95), rgba(107, 196, 234, 0.32));
         }
 
         .project-subtitle {
