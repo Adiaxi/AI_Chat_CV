@@ -624,6 +624,14 @@
                 if (event && track.hasPointerCapture(event.pointerId)) {
                     track.releasePointerCapture(event.pointerId);
                 }
+                if (!moved && event) {
+                    const element = document.elementFromPoint(event.clientX, event.clientY);
+                    const link = element && element.closest(".shot-link");
+                    if (link && track.contains(link)) {
+                        const img = link.querySelector(".shot");
+                        openImageLightbox(link.href, img ? img.alt : "Podgląd obrazu projektu");
+                    }
+                }
                 updateCenterSlide();
             }
 
@@ -640,17 +648,15 @@
             track.addEventListener("dragstart", (event) => event.preventDefault());
             slides.forEach((slide) => {
                 slide.addEventListener("dragstart", (event) => event.preventDefault());
-            });
-            track.addEventListener("click", (event) => {
-                const link = event.target.closest(".shot-link");
-                if (!link) return;
-                if (moved) {
+                slide.addEventListener("click", (event) => {
+                    if (moved) {
+                        event.preventDefault();
+                        return;
+                    }
                     event.preventDefault();
-                    return;
-                }
-                event.preventDefault();
-                const img = link.querySelector(".shot");
-                openImageLightbox(link.href, img ? img.alt : "Podgląd obrazu projektu");
+                    const img = slide.querySelector(".shot");
+                    openImageLightbox(slide.href, img ? img.alt : "Podgląd obrazu projektu");
+                });
             });
             window.addEventListener("resize", () => {
                 recalcLoopMetrics();
