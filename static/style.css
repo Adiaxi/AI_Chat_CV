@@ -554,6 +554,41 @@ body.portfolio-page {
     padding: 6px 10px;
 }
 
+#umiejetnosci .chips {
+    margin-bottom: 14px;
+    padding: 10px;
+    border-radius: 12px;
+    border: 1px solid rgba(141, 176, 207, 0.2);
+    background: rgba(10, 18, 28, 0.38);
+}
+
+#umiejetnosci .chip {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(166, 196, 223, 0.34);
+    color: #e4eef8;
+    font-size: 12px;
+    padding: 7px 11px;
+}
+
+#umiejetnosci .grid {
+    gap: 10px;
+}
+
+#umiejetnosci .card {
+    background: rgba(12, 21, 33, 0.58);
+    border-color: rgba(146, 178, 208, 0.22);
+}
+
+#umiejetnosci .card h3 {
+    font-size: 17px;
+    margin-bottom: 7px;
+}
+
+#umiejetnosci .card p {
+    font-size: 13.5px;
+    line-height: 1.55;
+}
+
 .grid {
     display: grid;
     gap: 12px;
