@@ -106,6 +106,11 @@ ZASADY - przestrzegaj bezwzględnie:
 def home():
     return render_template('index.html')  # Twoje nowe portfolio
 
+@app.route('/projekty')
+@app.route('/projekty.html')
+def projekty():
+    return render_template('projekty.html')
+
 @app.route('/ai-asystent')
 def ai_asystent():
     return render_template('chat.html')   # Stary czat
