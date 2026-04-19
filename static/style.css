@@ -88,6 +88,29 @@ body.chat-page button:hover {
     background: #2e3a3d;
 }
 
+.chat-back-btn {
+    position: fixed;
+    top: 14px;
+    left: 14px;
+    z-index: 20;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    color: #f3f7ff;
+    background: rgba(9, 14, 20, 0.6);
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    backdrop-filter: blur(4px);
+}
+
+.chat-back-btn:hover {
+    background: rgba(9, 14, 20, 0.8);
+}
+
 @keyframes blink {
     0% { opacity: .2; }
     20% { opacity: 1; }
@@ -149,6 +172,13 @@ body.chat-page button:hover {
         padding: 8px 14px;
         font-size: 13px;
         white-space: nowrap;
+    }
+
+    .chat-back-btn {
+        top: 10px;
+        left: 10px;
+        font-size: 12px;
+        padding: 7px 12px;
     }
 }
 
