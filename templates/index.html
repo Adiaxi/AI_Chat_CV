@@ -5,6 +5,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adrian Kluska | Portfolio</title>
     <link rel="stylesheet" href="../static/style.css">
+    <style>
+        .menu {
+            gap: 12px;
+        }
+
+        .menu a {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .menu a + a::before {
+            content: "|";
+            display: inline-block;
+            margin: 0 10px 0 2px;
+            color: rgba(255, 255, 255, 0.34);
+            font-weight: 400;
+        }
+
+        .topbar-compact {
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-12px);
+            width: min(960px, calc(100% - 20px));
+            z-index: 1400;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 220ms ease, transform 220ms ease;
+        }
+
+        .topbar-compact.visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .topbar-compact .topbar {
+            min-height: 52px;
+            padding-top: 4px;
+            padding-bottom: 4px;
+            border-radius: 12px;
+        }
+
+        .topbar-compact .brand {
+            font-size: 0.95rem;
+        }
+
+        .topbar-compact .menu a {
+            font-size: 0.92rem;
+        }
+
+        @media (max-width: 768px) {
+            .topbar {
+                padding: 12px 14px;
+                gap: 10px;
+            }
+
+            .menu {
+                width: 100%;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                overflow-y: hidden;
+                white-space: nowrap;
+                gap: 8px;
+                justify-content: flex-start;
+                scrollbar-width: none;
+            }
+
+            .menu::-webkit-scrollbar {
+                display: none;
+            }
+
+            .menu a {
+                font-size: 0.95rem;
+                font-weight: 600;
+            }
+
+            .menu a + a::before {
+                margin: 0 8px 0 0;
+            }
+
+            .social {
+                display: none;
+            }
+
+            .topbar-compact {
+                top: 8px;
+                width: calc(100% - 12px);
+            }
+
+            .topbar-compact .topbar {
+                min-height: 46px;
+                padding: 6px 10px;
+            }
+
+            .topbar-compact .brand {
+                display: none;
+            }
+
+            .topbar-compact .menu a {
+                font-size: 0.86rem;
+            }
+        }
+    </style>
 </head>
 <body class="portfolio-page">
     <main class="layout">
@@ -12,6 +116,7 @@
             <header class="topbar">
                 <div class="brand">Adrian Kluska</div>
                 <nav class="menu" aria-label="Nawigacja">
+                    <a href="projekty.html">Galeria</a>
                     <a href="#o-mnie">O mnie</a>
                     <a href="#umiejetnosci">Umiejętności</a>
                     <a href="#projekty">Projekty</a>
@@ -79,18 +184,30 @@
 
             <article class="section" id="projekty">
                 <h2>Projekty</h2>
+                <p>Wybrane projekty.</p>
                 <div class="grid">
+                    <div class="card">
+                        <h3>Bank App</h3>
+                        <p>Aplikacja w Pythonie do zarządzania placówkami banków na mapie + zapis/edycja w bazie danych.</p>
+                        <div class="hero-cta">
+                            <a href="projekty.html#bank-app" class="btn btn-ghost">Zobacz galerię</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>Bank Site</h3>
+                        <p>Wersja webowa: ten sam koncept zarządzania placówkami na stronie (mapa + CRUD + baza danych).</p>
+                        <div class="hero-cta">
+                            <a href="projekty.html#bank-site" class="btn btn-ghost">Zobacz galerię</a>
+                        </div>
+                    </div>
+
                     <div class="card">
                         <h3>AI CV Assistant</h3>
                         <p>Asystent oparty o Flask, odpowiadający na pytania o doświadczenie i technologie.</p>
-                    </div>
-                    <div class="card">
-                        <h3>System feedbacku AI</h3>
-                        <p>Zbieranie ocen jakości odpowiedzi oraz zapis danych do bazy PostgreSQL.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Narzędzia geo</h3>
-                        <p>Koncepty aplikacji geoinformatycznych do analizy danych i wizualizacji przestrzennej.</p>
+                        <div class="hero-cta">
+                            <a href="chat.html" class="btn btn-ghost">Przejdź do czatu</a>
+                        </div>
                     </div>
                 </div>
             </article>
@@ -145,6 +262,8 @@
             2026 Adrian Kluska. Portfolio informatyczno-geoinformatyczne.
         </footer>
     </main>
+
+    <div class="topbar-compact" id="compactTopbar" aria-hidden="true"></div>
 
     <div class="modal-overlay" id="emailModal" aria-hidden="true">
         <div class="modal" role="dialog" aria-modal="true" aria-labelledby="emailModalTitle">
@@ -201,6 +320,30 @@
                 copyEmailBtn.textContent = "Skopiuj ręcznie";
             }
         });
+
+        function initCompactTopbar() {
+            if (window.matchMedia("(max-width: 640px)").matches) return;
+            const original = document.querySelector(".topbar");
+            const compactHost = document.getElementById("compactTopbar");
+            if (!original || !compactHost) return;
+
+            const compactHeader = original.cloneNode(true);
+            compactHeader.querySelectorAll("[id]").forEach((node) => node.removeAttribute("id"));
+            compactHost.appendChild(compactHeader);
+
+            const observer = new IntersectionObserver(
+                ([entry]) => {
+                    const showCompact = !entry.isIntersecting;
+                    compactHost.classList.toggle("visible", showCompact);
+                    compactHost.setAttribute("aria-hidden", showCompact ? "false" : "true");
+                },
+                { threshold: 0.01 }
+            );
+
+            observer.observe(original);
+        }
+
+        initCompactTopbar();
     </script>
 </body>
 </html>

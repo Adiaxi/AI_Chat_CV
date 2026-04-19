@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adrian Kluska | Projekty</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <style>
+        :root {
+            --card-bg: rgba(8, 13, 24, 0.6);
+            --card-border: rgba(255, 255, 255, 0.12);
+            --card-border-hover: rgba(109, 195, 255, 0.55);
+            --radius-lg: 20px;
+            --radius-md: 14px;
+            --space-1: 10px;
+            --space-2: 14px;
+            --space-3: 18px;
+            --space-4: 24px;
+            --slide-w: min(78vw, 320px);
+        }
+
+        .projects-page .hero-wrap {
+            min-height: auto;
+            padding-bottom: var(--space-3);
+        }
+
+        .menu {
+            gap: 12px;
+        }
+
+        .menu a {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .menu a + a::before {
+            content: "|";
+            display: inline-block;
+            margin: 0 10px 0 2px;
+            color: rgba(255, 255, 255, 0.34);
+            font-weight: 400;
+        }
+
+        .topbar-compact {
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-12px);
+            width: min(960px, calc(100% - 20px));
+            z-index: 1400;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 220ms ease, transform 220ms ease;
+        }
+
+        .topbar-compact.visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .topbar-compact .topbar {
+            min-height: 52px;
+            padding-top: 4px;
+            padding-bottom: 4px;
+            border-radius: 12px;
+        }
+
+        .topbar-compact .brand {
+            font-size: 0.95rem;
+        }
+
+        .topbar-compact .menu a {
+            font-size: 0.92rem;
+        }
+
+        @media (max-width: 768px) {
+            .topbar {
+                padding: 12px 14px;
+                gap: 10px;
+            }
+
+            .menu {
+                width: 100%;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                overflow-y: hidden;
+                white-space: nowrap;
+                gap: 8px;
+                justify-content: flex-start;
+                scrollbar-width: none;
+            }
+
+            .menu::-webkit-scrollbar {
+                display: none;
+            }
+
+            .menu a {
+                font-size: 0.95rem;
+                font-weight: 600;
+            }
+
+            .menu a + a::before {
+                margin: 0 8px 0 0;
+            }
+
+            .social {
+                display: none;
+            }
+
+            .topbar-compact {
+                top: 8px;
+                width: calc(100% - 12px);
+            }
+
+            .topbar-compact .topbar {
+                min-height: 46px;
+                padding: 6px 10px;
+            }
+
+            .topbar-compact .brand {
+                display: none;
+            }
+
+            .topbar-compact .menu a {
+                font-size: 0.86rem;
+            }
+
+            :root {
+                --slide-w: min(86vw, 330px);
+            }
+
+            .carousel-nav {
+                width: 30px;
+                height: 30px;
+            }
+
+            .shot-link {
+                transform: scale(0.9);
+                opacity: 0.7;
+            }
+
+            .shot-link.is-center {
+                transform: scale(1);
+            }
+        }
+
+        .projects-page .projects-hero,
+        .projects-page .main {
+            padding-left: clamp(14px, 4vw, 44px);
+            padding-right: clamp(14px, 4vw, 44px);
+        }
+
+        .projects-hero {
+            padding: clamp(22px, 4vw, 36px) 0 var(--space-2);
+        }
+
+        .projects-hero h1 {
+            margin: 8px 0 0;
+            letter-spacing: -0.01em;
+            line-height: 1.1;
+            font-size: clamp(1.9rem, 4.6vw, 3rem);
+            font-weight: 750;
+            color: #edf5ff;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+        }
+
+        .anchors {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-1);
+            margin-top: 16px;
+        }
+
+        .anchors a {
+            text-decoration: none;
+        }
+
+        .projects-page .main {
+            display: grid;
+            gap: var(--space-3);
+            padding-bottom: var(--space-4);
+        }
+
+        .project-section {
+            margin-top: 0;
+        }
+
+        .project-shell {
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--card-border);
+            background: linear-gradient(180deg, rgba(16, 22, 36, 0.74), var(--card-bg));
+            padding: var(--space-3);
+            content-visibility: auto;
+            contain-intrinsic-size: 700px;
+        }
+
+        .project-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--space-2);
+            flex-wrap: wrap;
+        }
+
+        .project-head h2 {
+            margin: 0;
+            font-size: clamp(1.2rem, 2.8vw, 1.55rem);
+        }
+
+        .project-subtitle {
+            margin: 12px 0 0;
+            max-width: 66ch;
+            line-height: 1.55;
+            font-size: 0.95rem;
+            color: rgba(227, 238, 251, 0.9);
+        }
+
+        .back-top {
+            opacity: 0.78;
+            padding: 6px 12px;
+            font-size: 0.82rem;
+        }
+
+        .carousel {
+            position: relative;
+            margin-top: 16px;
+        }
+
+        .shots-grid {
+            display: flex;
+            gap: 12px;
+            padding: 14px;
+            padding-left: calc((100% - var(--slide-w)) / 2);
+            padding-right: calc((100% - var(--slide-w)) / 2);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: linear-gradient(180deg, rgba(245, 249, 255, 0.06), rgba(245, 249, 255, 0.02));
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-snap-type: x mandatory;
+            scroll-padding-inline: calc((100% - var(--slide-w)) / 2);
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            cursor: grab;
+            user-select: none;
+            touch-action: pan-y;
+        }
+
+        .shot-link {
+            display: block;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(175, 205, 235, 0.22);
+            background: linear-gradient(180deg, rgba(248, 252, 255, 0.97), rgba(236, 243, 252, 0.95));
+            position: relative;
+            transition: transform 140ms ease, border-color 140ms ease, box-shadow 140ms ease, opacity 140ms ease, filter 140ms ease;
+            box-shadow: 0 5px 12px rgba(2, 10, 26, 0.2);
+            flex: 0 0 var(--slide-w);
+            scroll-snap-align: center;
+            opacity: 0.58;
+            filter: saturate(0.72);
+            transform: scale(0.82);
+            -webkit-user-drag: none;
+            will-change: transform;
+        }
+
+        .shot {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+            padding: 6px;
+            border-radius: 10px;
+            background: transparent;
+            transition: transform 220ms ease;
+            pointer-events: none;
+            -webkit-user-drag: none;
+        }
+
+        .shot-link.is-center .shot {
+            object-fit: contain;
+            background: rgba(10, 16, 28, 0.88);
+            padding: 10px;
+        }
+
+        .shot-link:not(.is-center) .shot {
+            filter: saturate(0.82) brightness(0.9);
+        }
+
+        .shot-link.is-center {
+            opacity: 1;
+            filter: saturate(1);
+            transform: scale(0.98);
+            border-color: rgba(121, 194, 246, 0.65);
+            box-shadow: 0 10px 22px rgba(2, 10, 26, 0.3);
+        }
+
+        .shot-link:hover {
+            border-color: rgba(121, 194, 246, 0.7);
+            box-shadow: 0 10px 22px rgba(2, 10, 26, 0.28);
+        }
+
+        .shot-link:hover .shot {
+            transform: scale(1.018);
+        }
+
+        .shot-link:focus-visible,
+        .anchors a:focus-visible,
+        .project-head a:focus-visible,
+        .carousel-nav:focus-visible {
+            outline: 2px solid rgba(160, 221, 255, 0.95);
+            outline-offset: 2px;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+            width: 36px;
+            height: 36px;
+            border-radius: 999px;
+            border: 1px solid rgba(188, 221, 246, 0.5);
+            background: rgba(7, 14, 25, 0.86);
+            color: #e9f4ff;
+            cursor: pointer;
+            display: grid;
+            place-items: center;
+            line-height: 1;
+        }
+
+        .carousel-nav.prev {
+            left: 8px;
+        }
+
+        .carousel-nav.next {
+            right: 8px;
+        }
+
+        .shots-grid::-webkit-scrollbar {
+            display: none;
+        }
+
+        .shots-grid.is-dragging {
+            cursor: grabbing;
+            scroll-snap-type: none;
+        }
+
+        @media (min-width: 980px) {
+            :root {
+                --slide-w: min(48vw, 420px);
+            }
+            .projects-hero {
+                padding-top: var(--space-4);
+            }
+            .projects-page .main {
+                gap: 22px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .shot-link {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+<body class="portfolio-page projects-page">
+    <main class="layout">
+        <section class="hero-wrap hero" id="start">
+            <header class="topbar">
+                <div class="brand">Adrian Kluska</div>
+                <nav class="menu" aria-label="Nawigacja">
+                    <a href="index.html#o-mnie">O mnie</a>
+                    <a href="index.html#umiejetnosci">Umiejętności</a>
+                    <a href="index.html#projekty">Projekty</a>
+                    <a href="#galeria" aria-current="page">Galeria</a>
+                    <a href="index.html#kontakt">Kontakt</a>
+                    <a href="index.html#ai-asystent">AI</a>
+                </nav>
+                <div class="social" aria-label="Skróty">
+                    <a class="social-link" href="https://github.com/Adiaxi" target="_blank" rel="noopener noreferrer" aria-label="GitHub">G</a>
+                    <a class="social-link" href="index.html#kontakt" aria-label="Kontakt">@</a>
+                </div>
+            </header>
+
+            <div class="projects-hero">
+                <h1>Projekty</h1>
+                <div class="anchors" id="galeria" aria-label="Skróty do sekcji">
+                    <a class="btn btn-main" href="#bank-app">Bank App</a>
+                    <a class="btn btn-ghost" href="#bank-site">Bank Site</a>
+                    <a class="btn btn-ghost" href="index.html#projekty">Powrót do portfolio</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="main">
+            <article class="section project-section" id="bank-app">
+                <div class="project-shell">
+                    <div class="project-head">
+                        <h2>Bank App</h2>
+                        <a class="btn btn-ghost back-top" href="#start">Na górę</a>
+                    </div>
+                    <p class="project-subtitle">
+                        Desktopowa aplikacja w Pythonie do zarządzania placówkami banków: mapa, szybka edycja rekordów i zapis danych w bazie.
+                    </p>
+
+                    <div class="carousel">
+                        <button type="button" class="carousel-nav prev" aria-label="Poprzedni screenshot Bank App">‹</button>
+                        <div class="shots-grid" aria-label="Screenshoty Bank App">
+                            <a class="shot-link" href="../static/Bank_App/1.PNG" target="_blank" rel="noopener noreferrer" aria-label="Otwórz Bank App — 1.PNG">
+                                <img class="shot" src="../static/Bank_App/1.PNG" alt="Bank App — screenshot 1" loading="lazy" decoding="async">
+                            </a>
+                            <a class="shot-link" href="../static/Bank_App/2.PNG" target="_blank" rel="noopener noreferrer" aria-label="Otwórz Bank App — 2.PNG">
+                                <img class="shot" src="../static/Bank_App/2.PNG" alt="Bank App — screenshot 2" loading="lazy" decoding="async">
+                            </a>
+                            <a class="shot-link" href="../static/Bank_App/3.PNG" target="_blank" rel="noopener noreferrer" aria-label="Otwórz Bank App — 3.PNG">
+                                <img class="shot" src="../static/Bank_App/3.PNG" alt="Bank App — screenshot 3" loading="lazy" decoding="async">
+                            </a>
+                            <a class="shot-link" href="../static/Bank_App/4.PNG" target="_blank" rel="noopener noreferrer" aria-label="Otwórz Bank App — 4.PNG">
+                                <img class="shot" src="../static/Bank_App/4.PNG" alt="Bank App — screenshot 4" loading="lazy" decoding="async">
+                            </a>
+                            <a class="shot-link" href="../static/Bank_App/5.PNG" target="_blank" rel="noopener noreferrer" aria-label="Otwórz Bank App — 5.PNG">
+                                <img class="shot" src="../static/Bank_App/5.PNG" alt="Bank App — screenshot 5" loading="lazy" decoding="async">
+                            </a>
+                        </div>
+                        <button type="button" class="carousel-nav next" aria-label="Następny screenshot Bank App">›</button>
+                    </div>
+                </div>
+            </article>
+
+            <article class="section project-section" id="bank-site">
+                <div class="project-shell">
+                    <div class="project-head">
+                        <h2>Bank Site</h2>
+                        <a class="btn btn-ghost back-top" href="#start">Na górę</a>
+                    </div>
+                    <p class="project-subtitle">
+                        Webowa wersja rozwiązania: zarządzanie placówkami na stronie (mapa, dodawanie rekordów i praca na danych w bazie).
+                    </p>
+
+                    <div class="carousel">
+                        <button type="button" class="carousel-nav prev" aria-label="Poprzedni screenshot Bank Site">‹</button>
+                        <div class="shots-grid" aria-label="Screenshoty Bank Site">
+                            <a class="shot-link" href="../static/Bank_Site/1.PNG" target="_blank" rel="noopener noreferrer" aria-label="Otwórz Bank Site — 1.PNG">
+                                <img class="shot" src="../static/Bank_Site/1.PNG" alt="Bank Site — screenshot 1" loading="lazy" decoding="async">
+                            </a>
+                            <a class="shot-link" href="../static/Bank_Site/2.PNG" target="_blank" rel="noopener noreferrer" aria-label="Otwórz Bank Site — 2.PNG">
+                                <img class="shot" src="../static/Bank_Site/2.PNG" alt="Bank Site — screenshot 2" loading="lazy" decoding="async">
+                            </a>
+                            <a class="shot-link" href="../static/Bank_Site/3.PNG" target="_blank" rel="noopener noreferrer" aria-label="Otwórz Bank Site — 3.PNG">
+                                <img class="shot" src="../static/Bank_Site/3.PNG" alt="Bank Site — screenshot 3" loading="lazy" decoding="async">
+                            </a>
+                            <a class="shot-link" href="../static/Bank_Site/4.PNG" target="_blank" rel="noopener noreferrer" aria-label="Otwórz Bank Site — 4.PNG">
+                                <img class="shot" src="../static/Bank_Site/4.PNG" alt="Bank Site — screenshot 4" loading="lazy" decoding="async">
+                            </a>
+                            <a class="shot-link" href="../static/Bank_Site/5.PNG" target="_blank" rel="noopener noreferrer" aria-label="Otwórz Bank Site — 5.PNG">
+                                <img class="shot" src="../static/Bank_Site/5.PNG" alt="Bank Site — screenshot 5" loading="lazy" decoding="async">
+                            </a>
+                            <a class="shot-link" href="../static/Bank_Site/6.PNG" target="_blank" rel="noopener noreferrer" aria-label="Otwórz Bank Site — 6.PNG">
+                                <img class="shot" src="../static/Bank_Site/6.PNG" alt="Bank Site — screenshot 6" loading="lazy" decoding="async">
+                            </a>
+                            <a class="shot-link" href="../static/Bank_Site/7.PNG" target="_blank" rel="noopener noreferrer" aria-label="Otwórz Bank Site — 7.PNG">
+                                <img class="shot" src="../static/Bank_Site/7.PNG" alt="Bank Site — screenshot 7" loading="lazy" decoding="async">
+                            </a>
+                        </div>
+                        <button type="button" class="carousel-nav next" aria-label="Następny screenshot Bank Site">›</button>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <footer class="footer">
+            2026 Adrian Kluska. Portfolio informatyczno-geoinformatyczne.
+        </footer>
+    </main>
+    <div class="topbar-compact" id="compactTopbar" aria-hidden="true"></div>
+    <script>
+        const carousels = document.querySelectorAll(".carousel");
+
+        carousels.forEach((carousel) => {
+            const track = carousel.querySelector(".shots-grid");
+            const prevBtn = carousel.querySelector(".carousel-nav.prev");
+            const nextBtn = carousel.querySelector(".carousel-nav.next");
+            const originals = Array.from(track.querySelectorAll(".shot-link"));
+            let slides = [];
+            let loopStart = 0;
+            let loopEnd = 0;
+            let loopWidth = 0;
+            let isPointerDown = false;
+            let startX = 0;
+            let startScrollLeft = 0;
+            let moved = false;
+            let rafScheduled = false;
+
+            function duplicateForInfiniteLoop() {
+                const before = originals.map((slide) => {
+                    const clone = slide.cloneNode(true);
+                    clone.setAttribute("aria-hidden", "true");
+                    return clone;
+                });
+                const after = originals.map((slide) => {
+                    const clone = slide.cloneNode(true);
+                    clone.setAttribute("aria-hidden", "true");
+                    return clone;
+                });
+
+                before.reverse().forEach((clone) => track.prepend(clone));
+                after.forEach((clone) => track.append(clone));
+                slides = Array.from(track.querySelectorAll(".shot-link"));
+            }
+
+            function recalcLoopMetrics() {
+                const originalsCount = originals.length;
+                const firstOriginal = slides[originalsCount];
+                const firstAfterOriginals = slides[originalsCount * 2];
+                loopStart = firstOriginal ? firstOriginal.offsetLeft : 0;
+                loopEnd = firstAfterOriginals ? firstAfterOriginals.offsetLeft : 0;
+                loopWidth = Math.max(0, loopEnd - loopStart);
+                if (loopWidth > 0) {
+                    track.scrollLeft = loopStart;
+                }
+            }
+
+            function wrapScrollIfNeeded() {
+                if (!loopWidth) return;
+                if (track.scrollLeft < loopStart - loopWidth * 0.5) {
+                    track.scrollLeft += loopWidth;
+                } else if (track.scrollLeft > loopEnd + loopWidth * 0.5) {
+                    track.scrollLeft -= loopWidth;
+                }
+            }
+
+            function updateCenterSlide() {
+                wrapScrollIfNeeded();
+                const center = track.scrollLeft + track.clientWidth / 2;
+                let closest = null;
+                let closestDistance = Infinity;
+
+                slides.forEach((slide) => {
+                    const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
+                    const distance = Math.abs(slideCenter - center);
+                    if (distance < closestDistance) {
+                        closestDistance = distance;
+                        closest = slide;
+                    }
+                });
+
+                slides.forEach((slide) => slide.classList.remove("is-center"));
+                if (closest) closest.classList.add("is-center");
+            }
+
+            function scheduleUpdateCenter() {
+                if (rafScheduled) return;
+                rafScheduled = true;
+                requestAnimationFrame(() => {
+                    updateCenterSlide();
+                    rafScheduled = false;
+                });
+            }
+
+            function scrollByOne(direction) {
+                const firstSlide = slides[0];
+                if (!firstSlide) return;
+                const gap = 12;
+                const step = firstSlide.offsetWidth + gap;
+                track.scrollBy({ left: step * direction, behavior: "smooth" });
+            }
+
+            function onPointerDown(event) {
+                if (event.button !== 0) return;
+                isPointerDown = true;
+                moved = false;
+                startX = event.clientX;
+                startScrollLeft = track.scrollLeft;
+                track.classList.add("is-dragging");
+                track.setPointerCapture(event.pointerId);
+            }
+
+            function onPointerMove(event) {
+                if (!isPointerDown) return;
+                const delta = event.clientX - startX;
+                if (Math.abs(delta) > 4) moved = true;
+                track.scrollLeft = startScrollLeft - delta;
+            }
+
+            function onPointerUp(event) {
+                if (!isPointerDown) return;
+                isPointerDown = false;
+                track.classList.remove("is-dragging");
+                if (event && track.hasPointerCapture(event.pointerId)) {
+                    track.releasePointerCapture(event.pointerId);
+                }
+                updateCenterSlide();
+            }
+
+            duplicateForInfiniteLoop();
+            recalcLoopMetrics();
+
+            prevBtn.addEventListener("click", () => scrollByOne(-1));
+            nextBtn.addEventListener("click", () => scrollByOne(1));
+            track.addEventListener("scroll", scheduleUpdateCenter, { passive: true });
+            track.addEventListener("pointerdown", onPointerDown);
+            track.addEventListener("pointermove", onPointerMove);
+            track.addEventListener("pointerup", onPointerUp);
+            track.addEventListener("pointercancel", onPointerUp);
+            track.addEventListener("dragstart", (event) => event.preventDefault());
+            slides.forEach((slide) => {
+                slide.addEventListener("dragstart", (event) => event.preventDefault());
+            });
+            window.addEventListener("resize", () => {
+                recalcLoopMetrics();
+                updateCenterSlide();
+            });
+            updateCenterSlide();
+        });
+
+        function initCompactTopbar() {
+            if (window.matchMedia("(max-width: 640px)").matches) return;
+            const original = document.querySelector(".topbar");
+            const compactHost = document.getElementById("compactTopbar");
+            if (!original || !compactHost) return;
+
+            const compactHeader = original.cloneNode(true);
+            compactHeader.querySelectorAll("[id]").forEach((node) => node.removeAttribute("id"));
+            compactHost.appendChild(compactHeader);
+
+            const observer = new IntersectionObserver(
+                ([entry]) => {
+                    const showCompact = !entry.isIntersecting;
+                    compactHost.classList.toggle("visible", showCompact);
+                    compactHost.setAttribute("aria-hidden", showCompact ? "false" : "true");
+                },
+                { threshold: 0.01 }
+            );
+
+            observer.observe(original);
+        }
+
+        initCompactTopbar();
+    </script>
+</body>
+</html>
+
